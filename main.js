@@ -1,51 +1,48 @@
-//1 Add a class of "featured" to the first section element on the page.
-let firstSection = document.getElementsByTagName("section")[0];
+const firstSection = document.querySelector("section")
+
 firstSection.classList.add('featured')
 
-//2  Create the following article element with JavaScript
-// Create the article element
-let article = document.createElement('article');
+const article = `<img
+  src="./images/paul-gilmore-unsplash.jpg"
+  alt="Image of a mountain in front of a lake."
+/>
+<h3>Stop Planning</h3>
+<p>
+  You -- yes you! You're an over-planner, I can tell. It's time to stop
+  planning so much and instead focusing on relaxing. Taking a break at all is
+  so stressful these days; why add to the stress by overworking yourself?
+</p>
+<aside>
+  <p>
+    <span><strong>Read Time:</strong> 4 Minutes</span
+    ><a href="#">Read more...</a>
+  </p>
+</aside>`
+;
 
-// Create the img element
-let img = document.createElement('img');
-img.src = "./images/paul-gilmore-unsplash.jpg";
-img.alt = "Image of a mountain in front of a lake.";
-article.appendChild(img);
+const articleElement = document.createElement("article")
+articleElement.innerHTML = article;
 
-// Create the h3 element
-let h3 = document.createElement('h3');
-h3.textContent = "Stop Planning";
-article.appendChild(h3);
+document.querySelector(".posts").appendChild(articleElement);
 
-// Create the p element
-let p = document.createElement('p');
-p.textContent = "You -- yes you! You're an over-planner, I can tell. It's time to stop planning so much and instead focusing on relaxing. Taking a break at all is so stressful these days; why add to the stress by overworking yourself?";
-article.appendChild(p);
+const firstArticle = document.querySelector(".posts").children[0];
+const secondArticle = document.querySelector(".posts").children[1];
+document.querySelector(".posts").insertBefore(secondArticle, firstArticle);
 
-// Create the aside element
-let aside = document.createElement('aside');
-let pAside = document.createElement('p');
-let span = document.createElement('span');
+const parent = document.getElementsByTagName("header")[0].getElementsByTagName("ul")[0];
+const child = document.getElementsByTagName("li")[0];
+parent.removeChild(child);
 
-let strong = document.createElement('strong');
-strong.textContent = "Read Time:";
-span.appendChild(strong);
+const aside = firstSection.querySelector("article").querySelector("aside")
+const asideChild = aside.getElementsByTagName("p")[0].querySelector("span");
 
-let textNode = document.createTextNode(" 4 Minutes");
-span.appendChild(textNode);
+aside.getElementsByTagName("p")[0].removeChild(asideChild)
 
-let a = document.createElement('a');
-a.href = "#";
-a.textContent = "Read more...";
-pAside.appendChild(span);
-pAside.appendChild(a);
-aside.appendChild(pAside);
-article.appendChild(aside);
+let posts = document.querySelector(".posts");
 
-//2  add at the end of the section.posts element:
-// this appends the article to the section.posts element
-document.querySelector('section.posts').appendChild(article);
+posts.removeChild(posts.lastChild)
 
-
-
-//3
+let children = posts.querySelectorAll("article")
+for(let i = 0; i < children.length; i++){
+    children[i].querySelector("h3").remove()
+}
